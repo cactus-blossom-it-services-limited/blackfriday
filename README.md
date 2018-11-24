@@ -1,3 +1,7 @@
+## This consumes a Drupal 8 JSON API
+
+This is a skeleton React.js app that consumes data from a demo site.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
