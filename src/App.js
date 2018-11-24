@@ -1,28 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+const API = 'https://dev-contentacms.pantheonsite.io/api/';
+const DEFAULT_QUERY = 'recipes';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      recipes: { data: [] },
+    };
+  }
+
+  componentDidMount() {
+    fetch(API + DEFAULT_QUERY)
+      .then(response => response.json())
+      .then(recipes => this.setState({ recipes }));
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <ul>
+        {this.state.recipes.data.map(
+          recipe =>
+          (<li key={recipe.attributes.uuid}>
+            <h3>{recipe.attributes.title}</h3>
+          </li>),
+        )}
+      </ul>
     );
   }
+
 }
 
 export default App;
